@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = "ReactUI"
   s.version          = "0.1.0"
-  s.summary          = "A short description of ReactUI."
+  s.summary          = "The MVVM framework that makes iOS development much easier and faster"
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,9 +17,10 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
+                      The MVVM framework that makes iOS development much easier and faster and faster
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/ReactUI"
+  s.homepage         = "https://github.com/xuhuiqiyi/ReactUI"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Xu Hui" => "xuhui@qiyi.com" }
@@ -36,5 +37,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'ReactiveCocoa', '~> 2.4.7'
 end

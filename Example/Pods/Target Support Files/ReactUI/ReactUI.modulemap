@@ -1,0 +1,6 @@
+framework module ReactUI {
+  umbrella header "ReactUI-umbrella.h"
+
+  export *
+  module * { export * }
+}

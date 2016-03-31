@@ -1,0 +1,30 @@
+{
+  "name": "ReactUI",
+  "version": "0.1.0",
+  "summary": "The MVVM framework that makes iOS development much easier and faster",
+  "description": "MVVM",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/ReactUI",
+  "license": "MIT",
+  "authors": {
+    "Xu Hui": "xuhui@qiyi.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/ReactUI.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "ReactUI": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "dependencies": {
+    "ReactiveCocoa": [
+      "~> 2.4.7"
+    ]
+  }
+}
