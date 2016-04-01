@@ -25,9 +25,6 @@
     return self;
 }
 
-- (void) setViewModel:(RXUViewModel *)viewModel {
-    [super setViewModel:viewModel];
-}
 
 - (void) renderViewModel:(BasicViewModel *)viewModel {
     [super renderViewModel:viewModel];

@@ -10,6 +10,7 @@
 #import "UITableView+ReactUI.h"
 #import "RXUViewModel.h"
 #import "UIView+ReactUI.h"
+#import "UITableViewCell+ReactUI.h"
 
 const void *UITableViewClassRegistry = &UITableViewClassRegistry;
 
@@ -119,6 +120,7 @@ const void *UITableViewClassRegistry = &UITableViewClassRegistry;
     
     // Set the view model to the cell
     if (cell != nil) {
+        cell.tableView = self;
         cell.viewModel = viewModel;
     }
     
