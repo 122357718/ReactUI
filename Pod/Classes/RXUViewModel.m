@@ -49,14 +49,12 @@
 
 - (RACSignal *)onDataReadySignal {
     if (_onDataReadySignal == nil) {
-        RACMulticastConnection *connection = [[[RACObserve(self, loadDataCommand)
-                                               map:^id(RACCommand *command) {
-                                                   return command.completionSignal;
-                                               }]
-                                               switchToLatest]
-                                               publish];
-        [connection connect];
-        _onDataReadySignal = connection.signal;
+        _onDataReadySignal = [[[RACObserve(self, loadDataCommand)
+                               map:^id(RACCommand *command) {
+                                   return command.completionSignal;
+                               }]
+                               switchToLatest]
+                               replayLast];
     }
     
     return _onDataReadySignal;
@@ -66,12 +64,13 @@
 - (RACSignal *) onRenderSignal {
     if (_onRenderSignal == nil) {
         @weakify(self);
-        _onRenderSignal = [[[self rac_signalForSelector:@selector(render:)]
+        _onRenderSignal = [[[[self rac_signalForSelector:@selector(render:)]
                                   map:^id(id value) {
                                       @strongify(self);
                                       return self;
                                   }]
-                                  startWith:self];
+                                  startWith:self]
+                                  replayLast];
     }
     
     return _onRenderSignal;
@@ -80,7 +79,7 @@
 
 - (RACSignal *)onReloadSignal {
     if (_onReloadSignal == nil) {
-        _onReloadSignal = RACObserve(self, viewModels);
+        _onReloadSignal = [RACObserve(self, viewModels) replayLast];
     }
     
     return _onReloadSignal;
