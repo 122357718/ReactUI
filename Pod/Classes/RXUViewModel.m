@@ -10,10 +10,10 @@
 #import "RACCommand+ReactUI.h"
 
 @interface RXUViewModel ()
-
-@property (nonatomic, strong, readonly) RACSignal *onDataReadySignal;
-@property (nonatomic, strong, readonly) RACSignal *onRenderSignal;
-@property (nonatomic, strong, readonly) RACSignal *onReloadSignal;
+//
+//@property (nonatomic, strong, readonly) RACSignal *onDataReadySignal;
+//@property (nonatomic, strong, readonly) RACSignal *onRenderSignal;
+//@property (nonatomic, strong, readonly) RACSignal *onReloadSignal;
 
 @end
 

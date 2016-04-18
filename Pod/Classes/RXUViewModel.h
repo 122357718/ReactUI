@@ -17,12 +17,16 @@
 
 @property (nonatomic, strong) RACCommand *loadDataCommand;
 
+@property (nonatomic, strong, readonly) RACSignal *onDataReadySignal;
+@property (nonatomic, strong, readonly) RACSignal *onRenderSignal;
+@property (nonatomic, strong, readonly) RACSignal *onReloadSignal;
+
 - (void) render: (id) sender;
 - (void) reload: (id) sender;
 
-- (RACSignal *) onDataReadySignal;
-- (RACSignal *) onRenderSignal;
-- (RACSignal *) onReloadSignal;
+//- (RACSignal *) onDataReadySignal;
+//- (RACSignal *) onRenderSignal;
+//- (RACSignal *) onReloadSignal;
 
 @end
 
