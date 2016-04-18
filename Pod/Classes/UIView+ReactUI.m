@@ -48,8 +48,6 @@ const void *UIViewModelAccessKey = &UIViewModelAccessKey;
     // Bind to render signal
     RACSignal *renderSignal = [viewModel.onRenderSignal
                                takeUntil:[self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
-    
-    
     [self rac_liftSelector:@selector(renderViewModel:)
                withSignals:renderSignal, nil];
     
