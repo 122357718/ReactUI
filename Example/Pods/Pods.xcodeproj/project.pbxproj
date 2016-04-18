@@ -973,18 +973,9 @@
 		57C4363E35F367EB4651C4888DC99270 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B42EE3968A63860093E85EB888D64F0F /* RACCancellableCommand.h */,
-				B7F5B2EB983BAE755C3100AB8679E1FF /* RACCancellableCommand.m */,
-				ABC29E024ED9EB581DBB403B92AB4F67 /* RACCommand+ReactUI.h */,
-				45E0689D0055D227C035AACCED938D51 /* RACCommand+ReactUI.m */,
-				6B96A10E976D0D8CCC3FAF1D1A98B679 /* RXUViewModel.h */,
-				1C4F44B3D31522D3E8063B685496ADD9 /* RXUViewModel.m */,
-				097F64D412F09986D804A330DD268396 /* UITableView+ReactUI.h */,
-				12E88B659AD0A1B9A6D0DE9318BE75DB /* UITableView+ReactUI.m */,
-				3A2F3055DA5390877575E42A44FF8D6F /* UIView+ReactUI.h */,
-				4519CD238FC518203A735299F2890A4E /* UIView+ReactUI.m */,
-				A53CC6CF1CAD2CD1005B69E4 /* UITableViewCell+ReactUI.h */,
-				A53CC6D01CAD2CD1005B69E4 /* UITableViewCell+ReactUI.m */,
+				A55D69B01CC4CD320018048B /* ReactiveCocoaGoodies */,
+				A55D69B11CC4CD500018048B /* View */,
+				A55D69B21CC4CD5B0018048B /* ViewModel */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1245,6 +1236,39 @@
 				2705B7B0ADBFAD9AECC0B85E47FF697C /* RACObjCRuntime.m */,
 			);
 			name = "no-arc";
+			sourceTree = "<group>";
+		};
+		A55D69B01CC4CD320018048B /* ReactiveCocoaGoodies */ = {
+			isa = PBXGroup;
+			children = (
+				B42EE3968A63860093E85EB888D64F0F /* RACCancellableCommand.h */,
+				B7F5B2EB983BAE755C3100AB8679E1FF /* RACCancellableCommand.m */,
+				ABC29E024ED9EB581DBB403B92AB4F67 /* RACCommand+ReactUI.h */,
+				45E0689D0055D227C035AACCED938D51 /* RACCommand+ReactUI.m */,
+			);
+			name = ReactiveCocoaGoodies;
+			sourceTree = "<group>";
+		};
+		A55D69B11CC4CD500018048B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				097F64D412F09986D804A330DD268396 /* UITableView+ReactUI.h */,
+				12E88B659AD0A1B9A6D0DE9318BE75DB /* UITableView+ReactUI.m */,
+				3A2F3055DA5390877575E42A44FF8D6F /* UIView+ReactUI.h */,
+				4519CD238FC518203A735299F2890A4E /* UIView+ReactUI.m */,
+				A53CC6CF1CAD2CD1005B69E4 /* UITableViewCell+ReactUI.h */,
+				A53CC6D01CAD2CD1005B69E4 /* UITableViewCell+ReactUI.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A55D69B21CC4CD5B0018048B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6B96A10E976D0D8CCC3FAF1D1A98B679 /* RXUViewModel.h */,
+				1C4F44B3D31522D3E8063B685496ADD9 /* RXUViewModel.m */,
+			);
+			name = ViewModel;
 			sourceTree = "<group>";
 		};
 		AD8E08A39AEA9B2E8C0650D1F9BE212C /* Support Files */ = {
