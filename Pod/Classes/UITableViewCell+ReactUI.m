@@ -30,21 +30,27 @@ const void *UITableViewCellTableViewKey = &UITableViewCellTableViewKey;
 }
 
 
-
 #pragma mark - Override super methods
 
-
-- (void) renderViewModel:(RXUViewModel *)viewModel {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:self];
+- (void) setViewModel:(RXUViewModel *)viewModel {
+    [super setViewModel:viewModel];
     
-    if (indexPath != nil) {
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                              withRowAnimation:UITableViewRowAnimationNone];
-    }
+    // render the viewmodel immediately.
+    [self renderViewModel:viewModel];
+    [self reloadSubviews:viewModel.viewModels];
 }
 
-- (void) reloadSubviews:(NSArray *)subViewModels {
-    [self.tableView reloadData];
+
+- (void) setupViewModelBindings:(RXUViewModel *)viewModel {
+    RACSignal *reloadSignal = [[RACSignal merge:@[[viewModel onRenderSignal], [viewModel onReloadSignal], [viewModel onDataReadySignal]]]
+                                          takeUntil: [self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
+    
+    @weakify(self);
+    [reloadSignal subscribeNext:^(id x) {
+        @strongify(self);
+        [self.tableView reloadData];
+    }];
 }
+
 
 @end

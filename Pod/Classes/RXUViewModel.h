@@ -20,6 +20,10 @@
 - (void) render: (id) sender;
 - (void) reload: (id) sender;
 
+- (RACSignal *) onDataReadySignal;
+- (RACSignal *) onRenderSignal;
+- (RACSignal *) onReloadSignal;
+
 @end
 
 

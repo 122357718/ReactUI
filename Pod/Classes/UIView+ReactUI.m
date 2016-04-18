@@ -57,16 +57,20 @@ const void *UIViewModelAccessKey = &UIViewModelAccessKey;
         [self prepareForSettingViewModel:self];
         
         objc_setAssociatedObject(self, UIViewModelAccessKey, viewModel, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        
-        // Bind to render signal
-        [self rac_liftSelector:@selector(renderViewModel:)
-                   withSignals:[self onViewModelRender], nil];
-        
-        
-        // Bind to sub viewmodel reload signal
-        [self rac_liftSelector:@selector(reloadSubviews:)
-                   withSignals:[self onViewModelReload], nil];
+        [self setupViewModelBindings:viewModel];
     }
+}
+
+
+- (void) setupViewModelBindings: (RXUViewModel *)viewModel {
+    // Bind to render signal
+    [self rac_liftSelector:@selector(renderViewModel:)
+               withSignals:[self onViewModelRender], nil];
+    
+    
+    // Bind to sub viewmodel reload signal
+    [self rac_liftSelector:@selector(reloadSubviews:)
+               withSignals:[self onViewModelReload], nil];
 }
 
 

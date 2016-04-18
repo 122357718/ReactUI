@@ -74,7 +74,7 @@
         controller.tableView.rowHeight = UITableViewAutomaticDimension;
         
         //Create view models
-        BasicViewModel *viewModel = [BasicViewModel viewModelForSample];
+        BasicViewModel *viewModel = [[BasicViewModel alloc] initForTableViewSample];
         
         RXUCellViewModel *cellViewModel = [[RXUCellViewModel alloc] init];
         cellViewModel.title = @"Cell View Model";

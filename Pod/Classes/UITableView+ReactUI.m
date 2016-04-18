@@ -52,7 +52,6 @@ const void *UITableViewClassRegistry = &UITableViewClassRegistry;
 
 #pragma mark - Override super methods
 
-
 - (void) reloadSubviews:(NSArray *)subViewModels {
     // Set delegate and data source to self
     self.delegate = self;

@@ -16,4 +16,7 @@
 - (void) renderViewModel: (RXUViewModel *)viewModel;
 - (void) reloadSubviews: (NSArray *)subViewModels;
 
+- (void) prepareForSettingViewModel: (id) sender;
+- (void) setupViewModelBindings: (RXUViewModel *)viewModel;
+
 @end

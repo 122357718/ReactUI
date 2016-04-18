@@ -17,5 +17,6 @@
 @property (nonatomic, strong) RACCommand *toggleCommand;
 
 + (instancetype) viewModelForSample;
+- (instancetype) initForTableViewSample;
 
 @end

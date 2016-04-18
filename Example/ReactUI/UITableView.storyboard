@@ -33,12 +33,11 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="ycs-8W-IFO" secondAttribute="bottom" constant="10" id="N3i-17-8mU"/>
-                                        <constraint firstItem="ycs-8W-IFO" firstAttribute="leading" secondItem="Tbx-FW-KCm" secondAttribute="leading" constant="10" id="P6g-8J-sPb"/>
-                                        <constraint firstItem="ycs-8W-IFO" firstAttribute="top" secondItem="Tbx-FW-KCm" secondAttribute="top" constant="10" id="QMR-kf-EgN"/>
+                                        <constraint firstAttribute="leading" secondItem="ycs-8W-IFO" secondAttribute="leading" constant="-10" id="P6g-8J-sPb"/>
+                                        <constraint firstAttribute="top" secondItem="ycs-8W-IFO" secondAttribute="top" constant="-10" id="QMR-kf-EgN"/>
                                         <constraint firstAttribute="trailing" secondItem="ycs-8W-IFO" secondAttribute="trailing" id="blU-Ig-4xM"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="messageLabel" destination="ycs-8W-IFO" id="Hvj-P1-cSg"/>
                                 </connections>
