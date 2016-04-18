@@ -10,10 +10,10 @@
 #import "RACCommand+ReactUI.h"
 
 @interface RXUViewModel ()
-
-@property (nonatomic, strong, readonly) RACSignal *onDataReadySignal;
-@property (nonatomic, strong, readonly) RACSignal *onRenderSignal;
-@property (nonatomic, strong, readonly) RACSignal *onReloadSignal;
+//
+//@property (nonatomic, strong, readonly) RACSignal *onDataReadySignal;
+//@property (nonatomic, strong, readonly) RACSignal *onRenderSignal;
+//@property (nonatomic, strong, readonly) RACSignal *onReloadSignal;
 
 @end
 
@@ -66,14 +66,12 @@
 - (RACSignal *) onRenderSignal {
     if (_onRenderSignal == nil) {
         @weakify(self);
-        RACMulticastConnection *connection = [[[self rac_signalForSelector:@selector(render:)]
-                                              map:^id(id value) {
-                                                  @strongify(self);
-                                                  return self;
-                                              }]
-                                              publish];
-        [connection connect];
-        _onRenderSignal = connection.signal;
+        _onRenderSignal = [[[self rac_signalForSelector:@selector(render:)]
+                                  map:^id(id value) {
+                                      @strongify(self);
+                                      return self;
+                                  }]
+                                  startWith:self];
     }
     
     return _onRenderSignal;
@@ -82,9 +80,7 @@
 
 - (RACSignal *)onReloadSignal {
     if (_onReloadSignal == nil) {
-        RACMulticastConnection *connection = [RACObserve(self, viewModels) publish];
-        [connection connect];
-        _onReloadSignal = connection.signal;
+        _onReloadSignal = RACObserve(self, viewModels);
     }
     
     return _onReloadSignal;
@@ -95,6 +91,7 @@
 
 
 - (void) render: (id) sender {
+    
 }
 
 

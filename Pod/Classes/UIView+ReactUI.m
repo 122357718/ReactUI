@@ -19,24 +19,6 @@ const void *UIViewModelAccessKey = &UIViewModelAccessKey;
 - (void) prepareForSettingViewModel: (id) sender {}
 
 
-- (RACSignal *) onViewModelRender {
-    @weakify(self);
-    return [[[[self.viewModel rac_signalForSelector:@selector(render:)]
-                              map:^id(id value) {
-                                  @strongify(self);
-                                  return self.viewModel;
-                              }]
-                              startWith:self.viewModel]
-                              takeUntil:[self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
-}
-
-
-- (RACSignal *) onViewModelReload {
-    return [RACObserve(self.viewModel, viewModels)
-            takeUntil:[self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
-}
-
-
 #pragma mark - ViewModel accessors
 
 - (RXUViewModel *)viewModel {
@@ -64,13 +46,19 @@ const void *UIViewModelAccessKey = &UIViewModelAccessKey;
 
 - (void) setupViewModelBindings: (RXUViewModel *)viewModel {
     // Bind to render signal
+    RACSignal *renderSignal = [viewModel.onRenderSignal
+                               takeUntil:[self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
+    
+    
     [self rac_liftSelector:@selector(renderViewModel:)
-               withSignals:[self onViewModelRender], nil];
+               withSignals:renderSignal, nil];
     
     
     // Bind to sub viewmodel reload signal
+    RACSignal *reloadSignal = [[viewModel onReloadSignal]
+                                          takeUntil: [self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
     [self rac_liftSelector:@selector(reloadSubviews:)
-               withSignals:[self onViewModelReload], nil];
+               withSignals:reloadSignal, nil];
 }
 
 
