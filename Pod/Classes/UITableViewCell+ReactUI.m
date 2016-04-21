@@ -42,9 +42,9 @@ const void *UITableViewCellTableViewKey = &UITableViewCellTableViewKey;
 
 - (void) setupViewModelBindings:(RXUViewModel *)viewModel {
     // 由于在设置ViewModel时已经手动触发了渲染和子视图加载，忽略渲染和重载消息各一次
-    RACSignal *reloadSignal = [[RACSignal merge:@[[viewModel onRenderSignal],
-                                                  [viewModel onReloadSignal],
-                                                  [viewModel onDataReadySignal]]]
+    RACSignal *reloadSignal = [[RACSignal merge:@[[[viewModel onRenderSignal] skip: 1],
+                                                  [[viewModel onReloadSignal] skip: 1],
+                                                  [[viewModel onDataReadySignal] skip: 1]]]
                                           takeUntil: [self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
     
     @weakify(self);
