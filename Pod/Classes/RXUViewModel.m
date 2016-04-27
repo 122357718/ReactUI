@@ -36,53 +36,33 @@
         _title = @"";
         _viewModels = @[];
         
+        @weakify(self);
+        RACMulticastConnection *connection = [[[RACObserve(self, loadDataCommand)
+                                                map:^id(RACCommand *command) {
+                                                    return command.completionSignal;
+                                                }]
+                                                switchToLatest]
+                                                publish];
+        _onDataReadySignal = connection.signal;
+        [connection connect];
+        
+        connection = [[[self rac_signalForSelector:@selector(render:)]
+                             map:^id(id value) {
+                                 return self_weak_;
+                             }]
+                             publish];
+        _onRenderSignal = connection.signal;
+        [connection connect];
+        
+        connection = [RACObserve(self, viewModels) publish];
+        _onReloadSignal = connection.signal;
+        [connection connect];
+        
         [self rac_liftSelector:@selector(render:) withSignals:RACObserve(self, title), nil];
         [self rac_liftSelector:@selector(reload:) withSignals:self.onDataReadySignal, nil];
     }
     
     return self;
-}
-
-
-#pragma mark - Property accessors
-
-
-- (RACSignal *)onDataReadySignal {
-    if (_onDataReadySignal == nil) {
-        _onDataReadySignal = [[[RACObserve(self, loadDataCommand)
-                               map:^id(RACCommand *command) {
-                                   return command.completionSignal;
-                               }]
-                               switchToLatest]
-                               replayLast];
-    }
-    
-    return _onDataReadySignal;
-}
-
-
-- (RACSignal *) onRenderSignal {
-    if (_onRenderSignal == nil) {
-        @weakify(self);
-        _onRenderSignal = [[[[self rac_signalForSelector:@selector(render:)]
-                                  map:^id(id value) {
-                                      @strongify(self);
-                                      return self;
-                                  }]
-                                  startWith:self]
-                                  replayLast];
-    }
-    
-    return _onRenderSignal;
-}
-
-
-- (RACSignal *)onReloadSignal {
-    if (_onReloadSignal == nil) {
-        _onReloadSignal = [RACObserve(self, viewModels) replayLast];
-    }
-    
-    return _onReloadSignal;
 }
 
 

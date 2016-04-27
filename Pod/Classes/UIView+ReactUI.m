@@ -46,17 +46,20 @@ const void *UIViewModelAccessKey = &UIViewModelAccessKey;
 
 - (void) setupViewModelBindings: (RXUViewModel *)viewModel {
     // Bind to render signal
-    RACSignal *renderSignal = [viewModel.onRenderSignal
-                               takeUntil:[self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
+    RACSignal *cancellationSignal = [RACSignal merge:@[[self rac_signalForSelector:@selector(prepareForSettingViewModel:)],
+                                                        self.rac_willDeallocSignal]];
+    RACSignal *renderSignal = [viewModel.onRenderSignal takeUntil:cancellationSignal];
     [self rac_liftSelector:@selector(renderViewModel:)
-               withSignals:renderSignal, nil];
-    
+               withSignals:renderSignal , nil];
     
     // Bind to sub viewmodel reload signal
-    RACSignal *reloadSignal = [[viewModel onReloadSignal]
-                                          takeUntil: [self rac_signalForSelector:@selector(prepareForSettingViewModel:)]];
+    RACSignal *reloadSignal = [viewModel.onReloadSignal takeUntil: cancellationSignal];
     [self rac_liftSelector:@selector(reloadSubviews:)
                withSignals:reloadSignal, nil];
+    
+    // Trigger render & reload
+    [self renderViewModel:viewModel];
+    [self reloadSubviews:viewModel.viewModels];
 }
 
 
