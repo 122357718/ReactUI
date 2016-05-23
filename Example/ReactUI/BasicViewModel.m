@@ -7,6 +7,7 @@
 //
 
 #import "BasicViewModel.h"
+#import "RACCancellableCommand.h"
 
 @implementation BasicViewModel
 
@@ -55,7 +56,7 @@
     
     // The toggle command
     @weakify(self);
-    self.toggleCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+    self.toggleCommand = [[RACCancellableCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         @strongify(self);
         self.busy = !self.busy;
         return [RACSignal return:self];

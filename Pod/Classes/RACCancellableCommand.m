@@ -11,11 +11,10 @@
 @implementation RACCancellableCommand
 
 - (instancetype) initWithEnabled:(RACSignal *)enabledSignal signalBlock:(RACSignal *(^)(id))signalBlock {
-    @weakify(self);
+    RACSignal *cancelSignal = [self rac_signalForSelector:@selector(prepareForCommandExecution:)];
     if (self = [super initWithEnabled:enabledSignal
                           signalBlock:^RACSignal *(id input) {
-                              @strongify(self);
-                              return [signalBlock(input) takeUntil:[self rac_signalForSelector:@selector(prepareForCommandExecution:)]];
+                              return [signalBlock(input) takeUntil:cancelSignal];
                           }]) {
                           };
     
